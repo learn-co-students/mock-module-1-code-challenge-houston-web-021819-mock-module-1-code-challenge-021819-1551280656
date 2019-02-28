@@ -1,6 +1,7 @@
 class Book
-    @@all = []
+
     attr_accessor :author, :title, :word_count
+    @@all = []
 
     def initialize(author: ,title: ,word_count: )
         self.author = author
@@ -9,16 +10,12 @@ class Book
         @@all << self
     end
 
-    def self.all 
-        @@all 
-        # book_array = []
-        # self.all.each do |x|
-        #     book_array << x.title
-        # end
-        # if you want just the book titles???
+    def self.all
+        @@all
     end
 
 
 
+   
 end
 

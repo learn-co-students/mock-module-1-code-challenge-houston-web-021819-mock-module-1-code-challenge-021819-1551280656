@@ -1,15 +1,15 @@
 class Author
-    attr_accessor :book, :name, :books
+
     @@all = []
 
-    def initialize(name, books=[])
+    def initialize(name)
         self.name = name
-        self.books = books
-        
         @@all << self
-        
-    end
-
+     end
+# the initialization also had that array of intances(of the Book class)error.
+#before thgis I had--- def initialize(name, books=[])--which is not abstract or a good practice
+#So now the initialization looks better
+     
     def self.all 
         @@all
     end
@@ -34,7 +34,7 @@ class Author
 
     # def total_words
     #     total = 0
-    #     self.books.each do |book|
+    #     self.books.each do |book|#that error array of instances in this line(also) author need not have an array of all the instances of the book.
     #         total += book.word_count
     #     end
     #     total

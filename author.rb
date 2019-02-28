@@ -1,48 +1,54 @@
 class Author
-    attr_accessor :books, :name
+    attr_accessor :book, :name, :books
     @@all = []
 
     def initialize(name, books=[])
         self.name = name
         self.books = books
+        
         @@all << self
-        @books = []
+        
     end
 
     def self.all 
-        @@all.map do |author|
-            author
-        end
-    end
-
-     def add_book(book)
-         book.author = self
-         @title = book.title
-         @word_count = book.word_count
-         @books << book
-
-     end
-
-    def write_book(title, word_count=0)
-        title = Book.new(title, word_count)
-        
-        @title = title
-        @word_count = word_count
-        title.author = self
-        @books << title
-    end
-
-    def book 
-        @title
+        @@all
     end
 
     def books
-        @books
+        Book.all.select {|book| book.author ==self}
     end
+
+    def write_book(title, word_count)
+        new_book = Book.new(title, word_count)
+        new_book.author = self
+        new_book
+        
+    end
+
+    def add_book(book)
+         book.author = self
+         @@all << self
+     end
+
+    
+
+    # def total_words
+    #     total = 0
+    #     self.books.each do |book|
+    #         total += book.word_count
+    #     end
+    #     total
+    # end
+    # =begin
+    #  In the above one, I used an array of instances(of Book class). 
+    # Since, it is not a good practice to have an array of instances of another class inside
+    # your class, moving forward to have the book to keep track of all its authors. 
+    # And am going to iterate over that
+    # =end
 
     def total_words
         total = 0
-        self.books.each do |book|
+        Book.all.each do |book|
             total += book.word_count
         end
         total
@@ -58,7 +64,7 @@ class Author
                 author_with_most_words = author
             end
         end
-        author_with_most_words.name
+        author_with_most_words
      end
 
 end
